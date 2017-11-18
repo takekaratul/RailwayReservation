@@ -1,0 +1,37 @@
+/*!50003 DROP PROCEDURE IF EXISTS `ReserveSeat` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReserveSeat`(IN trainID varchar(50) ,In UserId int,IN Class varchar(10), in TravelDate date )
+BEGIN
+
+START TRANSACTION;
+Select SeatId into @reserveSeat 
+	from TrainsWithAllSeats v 
+	join class c on v.classID = c.classid 
+	where c.ClassName =Class 
+	and v.TrainID=trainID 
+	and v.SeatId not in (select seatid from reservation where DateOfTravel=TravelDate) 
+	Limit 1;
+select @reserveSeat;
+	 if (@reserveSeat  is not null) then
+     insert into reservation(DateOfTravel,ReservationNo,SeatId,PersonID)  
+	 	values(TravelDate,FLOOR(RAND()*(9999999-1111111+1))+11111111,@reseveSeat,UserId);
+         
+	 	
+	 else 
+		  select 'no seats available';
+	 end if; 
+ COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
