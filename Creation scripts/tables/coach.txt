@@ -1,0 +1,27 @@
+
+--
+-- Table structure for table `coach`
+--
+
+DROP TABLE IF EXISTS `coach`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `coach` (
+  `CoachID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainClassID` int(11) NOT NULL,
+  `CoachName` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`CoachID`),
+  KEY `IX_Relationship27` (`TrainClassID`),
+  CONSTRAINT `has a` FOREIGN KEY (`TrainClassID`) REFERENCES `trainclass` (`TrainClassID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1013 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coach`
+--
+
+LOCK TABLES `coach` WRITE;
+/*!40000 ALTER TABLE `coach` DISABLE KEYS */;
+INSERT INTO `coach` VALUES (1001,10001,'S1'),(1002,10001,'S2'),(1003,10002,'S3'),(1004,10002,'S4'),(1005,10003,'S5'),(1006,10004,'S6'),(1007,10005,'S1'),(1008,10005,'S2'),(1009,10006,'S3'),(1010,10006,'S4'),(1011,10007,'S5'),(1012,10008,'S6');
+/*!40000 ALTER TABLE `coach` ENABLE KEYS */;
+UNLOCK TABLES;

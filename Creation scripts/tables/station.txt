@@ -1,0 +1,24 @@
+--
+-- Table structure for table `station`
+--
+
+DROP TABLE IF EXISTS `station`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `station` (
+  `StationID` int(11) NOT NULL AUTO_INCREMENT,
+  `StationName` varchar(50) NOT NULL,
+  PRIMARY KEY (`StationID`),
+  UNIQUE KEY `StationName` (`StationName`)
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station`
+--
+
+LOCK TABLES `station` WRITE;
+/*!40000 ALTER TABLE `station` DISABLE KEYS */;
+INSERT INTO `station` VALUES (110,'Back of the hill'),(115,'BeaconField'),(106,'Bringham Circle'),(114,'Brookline hills'),(113,'Brookline village'),(118,'Chestnut Hill'),(111,'Fenway'),(107,'Fenwood Rd.'),(112,'Longwood'),(105,'Longwood Medical Area'),(108,'Mission Park'),(104,'Museum of Fine Arts'),(116,'Newton Centre'),(103,'Northeastern'),(101,'Prudential'),(117,'Reservoir'),(120,'Riverside'),(109,'Riverway'),(102,'Symphony'),(119,'Woodland');
+/*!40000 ALTER TABLE `station` ENABLE KEYS */;
+UNLOCK TABLES;

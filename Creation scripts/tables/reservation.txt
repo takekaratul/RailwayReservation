@@ -1,0 +1,49 @@
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation` (
+  `DateOfTravel` date NOT NULL,
+  `ReservationNo` int(11) NOT NULL,
+  `SeatID` int(11) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`DateOfTravel`,`SeatID`),
+  KEY `IX_Relationship29` (`SeatID`),
+  KEY `IX_Relationship34` (`PersonID`),
+  CONSTRAINT `Has_a_Relationship10` FOREIGN KEY (`PersonID`) REFERENCES `user` (`PersonID`),
+  CONSTRAINT `contains` FOREIGN KEY (`SeatID`) REFERENCES `seat` (`SeatID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES ('2016-01-01',16426580,121,10),('2016-01-26',18533905,121,10),('2016-12-12',23123,101,10);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `train_databse`.`CANCEL_RESERVATION`
+AFTER DELETE ON `train_databse`.`reservation`
+FOR EACH ROW
+BEGIN
+INSERT INTO cancelreservation VALUES(OLD.DATEOFTRAVEL,OLD.RESERVATIONNO,OLD.SeatID,OLD.PersonID);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;

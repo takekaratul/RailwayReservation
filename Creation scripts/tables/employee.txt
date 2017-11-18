@@ -1,0 +1,27 @@
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee` (
+  `EmployeeID` int(11) NOT NULL,
+  `Manager` int(11) NOT NULL,
+  `SalaryPerMonth` int(11) NOT NULL,
+  `Position` varchar(20) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`PersonID`),
+  CONSTRAINT `Is_a_Relationship2` FOREIGN KEY (`PersonID`) REFERENCES `person` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (10,10,9000,'CEO',10),(13,11,3000,'Developer',16),(12,11,3000,'Manager',18),(13,11,3000,'Cashier',19),(11,10,7000,'President',22);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;

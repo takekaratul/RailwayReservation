@@ -1,0 +1,26 @@
+--
+-- Table structure for table `trainday`
+--
+
+DROP TABLE IF EXISTS `trainday`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainday` (
+  `DayOfWeekID` int(11) NOT NULL AUTO_INCREMENT,
+  `trainid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`DayOfWeekID`),
+  KEY `IX_Relationship50` (`DayOfWeekID`),
+  KEY `frgnkeytrains` (`trainid`),
+  CONSTRAINT `frgnkeyDayOftheweek` FOREIGN KEY (`DayOfWeekID`) REFERENCES `weekday` (`DayOfWeekID`),
+  CONSTRAINT `frgnkeytrains` FOREIGN KEY (`trainid`) REFERENCES `train` (`TrainID`)
+) ENGINE=InnoDB AUTO_INCREMENT=100004 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainday`
+--
+
+LOCK TABLES `trainday` WRITE;
+/*!40000 ALTER TABLE `trainday` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainday` ENABLE KEYS */;
+UNLOCK TABLES;

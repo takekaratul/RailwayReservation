@@ -1,0 +1,26 @@
+--
+-- Table structure for table `cancelreservation`
+--
+
+DROP TABLE IF EXISTS `cancelreservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cancelreservation` (
+  `DateOfTravel` date NOT NULL,
+  `ReservationNo` int(11) NOT NULL,
+  `SeatID` int(11) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`ReservationNo`),
+  KEY `IX_Relationship29` (`SeatID`),
+  KEY `IX_Relationship34` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cancelreservation`
+--
+
+LOCK TABLES `cancelreservation` WRITE;
+/*!40000 ALTER TABLE `cancelreservation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cancelreservation` ENABLE KEYS */;
+UNLOCK TABLES;

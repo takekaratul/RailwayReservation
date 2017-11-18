@@ -1,0 +1,25 @@
+--
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `person` (
+  `PersonID` int(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(20) NOT NULL,
+  `LastName` varchar(20) NOT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  PRIMARY KEY (`PersonID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `person`
+--
+
+LOCK TABLES `person` WRITE;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (10,'Atul','Takekar','1991-08-02'),(11,'Mihir','Patil','1999-12-30'),(12,'john','Lennon','2015-08-12'),(13,'Skill','Rex','1978-05-11'),(14,'Hard','well','1989-06-14'),(15,'Karan','Thevar','1998-02-16'),(16,'Brad','Pitt','1956-07-02'),(18,'T','Mass','1994-02-25'),(19,'Pratik','Patre','1986-08-26'),(21,'DJ','AViCII','1984-08-23'),(22,'DJ','AViCII','1984-08-23');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;

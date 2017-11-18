@@ -1,0 +1,29 @@
+--
+-- Table structure for table `seat`
+--
+
+DROP TABLE IF EXISTS `seat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seat` (
+  `SeatID` int(11) NOT NULL AUTO_INCREMENT,
+  `CoachID` int(11) NOT NULL,
+  `SeatTypeID` char(1) NOT NULL,
+  `SeatNo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`SeatID`),
+  KEY `is type of` (`SeatTypeID`),
+  KEY `contain a` (`CoachID`),
+  CONSTRAINT `contain a` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`CoachID`),
+  CONSTRAINT `is type of` FOREIGN KEY (`SeatTypeID`) REFERENCES `seattype` (`SeatTypeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seat`
+--
+
+LOCK TABLES `seat` WRITE;
+/*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` VALUES (101,1001,'U',1),(102,1001,'L',2),(103,1001,'M',3),(104,1001,'U',4),(105,1001,'L',5),(106,1002,'U',1),(107,1002,'L',2),(108,1002,'M',3),(109,1002,'U',4),(110,1002,'L',5),(111,1003,'U',1),(112,1003,'M',2),(113,1003,'L',3),(114,1003,'U',4),(115,1004,'U',1),(116,1004,'L',2),(117,1004,'M',3),(118,1004,'U',4),(119,1005,'U',1),(120,1005,'M',2),(121,1006,'M',1),(122,1007,'L',1),(123,1007,'M',2),(124,1007,'U',3),(125,1007,'L',4),(126,1007,'L',5),(127,1007,'U',6),(128,1008,'M',1),(129,1008,'U',2),(130,1008,'L',3),(131,1008,'L',4),(132,1008,'U',5),(133,1008,'L',6),(134,1009,'U',1),(135,1009,'M',2),(136,1009,'L',3),(137,1009,'U',4),(138,1009,'U',4),(139,1010,'U',1),(140,1010,'L',2),(141,1010,'M',3),(142,1010,'U',4),(143,1010,'U',4),(144,1011,'U',1),(145,1011,'M',2),(146,1011,'M',3),(147,1012,'M',1),(148,1012,'M',2);
+/*!40000 ALTER TABLE `seat` ENABLE KEYS */;
+UNLOCK TABLES;

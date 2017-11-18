@@ -1,0 +1,25 @@
+--
+-- Table structure for table `train`
+--
+
+DROP TABLE IF EXISTS `train`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `train` (
+  `TrainID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainName` varchar(50) NOT NULL,
+  `StartStation` int(11) NOT NULL,
+  `EndStation` int(11) NOT NULL,
+  PRIMARY KEY (`TrainID`)
+) ENGINE=InnoDB AUTO_INCREMENT=100004 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `train`
+--
+
+LOCK TABLES `train` WRITE;
+/*!40000 ALTER TABLE `train` DISABLE KEYS */;
+INSERT INTO `train` VALUES (100001,'Prudential-Heath Express',101,111),(100002,'Longwood-Riverside local',112,120),(100003,'Riverside-Longwood express',111,101);
+/*!40000 ALTER TABLE `train` ENABLE KEYS */;
+UNLOCK TABLES;

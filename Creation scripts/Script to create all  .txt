@@ -1,0 +1,618 @@
+CREATE DATABASE  IF NOT EXISTS `train_databse` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `train_databse`;
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: train_databse
+-- ------------------------------------------------------
+-- Server version	5.7.15-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cancelreservation`
+--
+
+DROP TABLE IF EXISTS `cancelreservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cancelreservation` (
+  `DateOfTravel` date NOT NULL,
+  `ReservationNo` int(11) NOT NULL,
+  `SeatID` int(11) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`ReservationNo`),
+  KEY `IX_Relationship29` (`SeatID`),
+  KEY `IX_Relationship34` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cancelreservation`
+--
+
+LOCK TABLES `cancelreservation` WRITE;
+/*!40000 ALTER TABLE `cancelreservation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cancelreservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `class`
+--
+
+DROP TABLE IF EXISTS `class`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `class` (
+  `ClassID` int(11) NOT NULL AUTO_INCREMENT,
+  `ClassName` varchar(20) NOT NULL,
+  PRIMARY KEY (`ClassID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `class`
+--
+
+LOCK TABLES `class` WRITE;
+/*!40000 ALTER TABLE `class` DISABLE KEYS */;
+INSERT INTO `class` VALUES (1,'3A'),(2,'2A'),(3,'1A'),(4,'SL');
+/*!40000 ALTER TABLE `class` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coach`
+--
+
+DROP TABLE IF EXISTS `coach`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `coach` (
+  `CoachID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainClassID` int(11) NOT NULL,
+  `CoachName` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`CoachID`),
+  KEY `IX_Relationship27` (`TrainClassID`),
+  CONSTRAINT `has a` FOREIGN KEY (`TrainClassID`) REFERENCES `trainclass` (`TrainClassID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1013 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coach`
+--
+
+LOCK TABLES `coach` WRITE;
+/*!40000 ALTER TABLE `coach` DISABLE KEYS */;
+INSERT INTO `coach` VALUES (1001,10001,'S1'),(1002,10001,'S2'),(1003,10002,'S3'),(1004,10002,'S4'),(1005,10003,'S5'),(1006,10004,'S6'),(1007,10005,'S1'),(1008,10005,'S2'),(1009,10006,'S3'),(1010,10006,'S4'),(1011,10007,'S5'),(1012,10008,'S6');
+/*!40000 ALTER TABLE `coach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employee` (
+  `EmployeeID` int(11) NOT NULL,
+  `Manager` int(11) NOT NULL,
+  `SalaryPerMonth` int(11) NOT NULL,
+  `Position` varchar(20) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`PersonID`),
+  CONSTRAINT `Is_a_Relationship2` FOREIGN KEY (`PersonID`) REFERENCES `person` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (10,10,9000,'CEO',10),(13,11,3000,'Developer',16),(12,11,3000,'Manager',18),(13,11,3000,'Cashier',19),(11,10,7000,'President',22);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `person` (
+  `PersonID` int(11) NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(20) NOT NULL,
+  `LastName` varchar(20) NOT NULL,
+  `DateOfBirth` date DEFAULT NULL,
+  PRIMARY KEY (`PersonID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `person`
+--
+
+LOCK TABLES `person` WRITE;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` VALUES (10,'Atul','Takekar','1991-08-02'),(11,'Mihir','Patil','1999-12-30'),(12,'john','Lennon','2015-08-12'),(13,'Skill','Rex','1978-05-11'),(14,'Hard','well','1989-06-14'),(15,'Karan','Thevar','1998-02-16'),(16,'Brad','Pitt','1956-07-02'),(18,'T','Mass','1994-02-25'),(19,'Pratik','Patre','1986-08-26'),(21,'DJ','AViCII','1984-08-23'),(22,'DJ','AViCII','1984-08-23');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation` (
+  `DateOfTravel` date NOT NULL,
+  `ReservationNo` int(11) NOT NULL,
+  `SeatID` int(11) NOT NULL,
+  `PersonID` int(11) NOT NULL,
+  PRIMARY KEY (`DateOfTravel`,`SeatID`),
+  KEY `IX_Relationship29` (`SeatID`),
+  KEY `IX_Relationship34` (`PersonID`),
+  CONSTRAINT `Has_a_Relationship10` FOREIGN KEY (`PersonID`) REFERENCES `user` (`PersonID`),
+  CONSTRAINT `contains` FOREIGN KEY (`SeatID`) REFERENCES `seat` (`SeatID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES ('2016-01-01',16426580,121,10),('2016-01-26',18533905,121,10),('2016-12-12',23123,101,10);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `train_databse`.`CANCEL_RESERVATION`
+AFTER DELETE ON `train_databse`.`reservation`
+FOR EACH ROW
+BEGIN
+INSERT INTO cancelreservation VALUES(OLD.DATEOFTRAVEL,OLD.RESERVATIONNO,OLD.SeatID,OLD.PersonID);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `seat`
+--
+
+DROP TABLE IF EXISTS `seat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seat` (
+  `SeatID` int(11) NOT NULL AUTO_INCREMENT,
+  `CoachID` int(11) NOT NULL,
+  `SeatTypeID` char(1) NOT NULL,
+  `SeatNo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`SeatID`),
+  KEY `is type of` (`SeatTypeID`),
+  KEY `contain a` (`CoachID`),
+  CONSTRAINT `contain a` FOREIGN KEY (`CoachID`) REFERENCES `coach` (`CoachID`),
+  CONSTRAINT `is type of` FOREIGN KEY (`SeatTypeID`) REFERENCES `seattype` (`SeatTypeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seat`
+--
+
+LOCK TABLES `seat` WRITE;
+/*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` VALUES (101,1001,'U',1),(102,1001,'L',2),(103,1001,'M',3),(104,1001,'U',4),(105,1001,'L',5),(106,1002,'U',1),(107,1002,'L',2),(108,1002,'M',3),(109,1002,'U',4),(110,1002,'L',5),(111,1003,'U',1),(112,1003,'M',2),(113,1003,'L',3),(114,1003,'U',4),(115,1004,'U',1),(116,1004,'L',2),(117,1004,'M',3),(118,1004,'U',4),(119,1005,'U',1),(120,1005,'M',2),(121,1006,'M',1),(122,1007,'L',1),(123,1007,'M',2),(124,1007,'U',3),(125,1007,'L',4),(126,1007,'L',5),(127,1007,'U',6),(128,1008,'M',1),(129,1008,'U',2),(130,1008,'L',3),(131,1008,'L',4),(132,1008,'U',5),(133,1008,'L',6),(134,1009,'U',1),(135,1009,'M',2),(136,1009,'L',3),(137,1009,'U',4),(138,1009,'U',4),(139,1010,'U',1),(140,1010,'L',2),(141,1010,'M',3),(142,1010,'U',4),(143,1010,'U',4),(144,1011,'U',1),(145,1011,'M',2),(146,1011,'M',3),(147,1012,'M',1),(148,1012,'M',2);
+/*!40000 ALTER TABLE `seat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seattype`
+--
+
+DROP TABLE IF EXISTS `seattype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `seattype` (
+  `SeatTypeID` char(1) NOT NULL,
+  `SeatTypeDescription` varchar(20) NOT NULL,
+  PRIMARY KEY (`SeatTypeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seattype`
+--
+
+LOCK TABLES `seattype` WRITE;
+/*!40000 ALTER TABLE `seattype` DISABLE KEYS */;
+INSERT INTO `seattype` VALUES ('L','Lower'),('M','Middle'),('U','Upper');
+/*!40000 ALTER TABLE `seattype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `station`
+--
+
+DROP TABLE IF EXISTS `station`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `station` (
+  `StationID` int(11) NOT NULL AUTO_INCREMENT,
+  `StationName` varchar(50) NOT NULL,
+  PRIMARY KEY (`StationID`),
+  UNIQUE KEY `StationName` (`StationName`)
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station`
+--
+
+LOCK TABLES `station` WRITE;
+/*!40000 ALTER TABLE `station` DISABLE KEYS */;
+INSERT INTO `station` VALUES (110,'Back of the hill'),(115,'BeaconField'),(106,'Bringham Circle'),(114,'Brookline hills'),(113,'Brookline village'),(118,'Chestnut Hill'),(111,'Fenway'),(107,'Fenwood Rd.'),(112,'Longwood'),(105,'Longwood Medical Area'),(108,'Mission Park'),(104,'Museum of Fine Arts'),(116,'Newton Centre'),(103,'Northeastern'),(101,'Prudential'),(117,'Reservoir'),(120,'Riverside'),(109,'Riverway'),(102,'Symphony'),(119,'Woodland');
+/*!40000 ALTER TABLE `station` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `train`
+--
+
+DROP TABLE IF EXISTS `train`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `train` (
+  `TrainID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainName` varchar(50) NOT NULL,
+  `StartStation` int(11) NOT NULL,
+  `EndStation` int(11) NOT NULL,
+  PRIMARY KEY (`TrainID`)
+) ENGINE=InnoDB AUTO_INCREMENT=100004 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `train`
+--
+
+LOCK TABLES `train` WRITE;
+/*!40000 ALTER TABLE `train` DISABLE KEYS */;
+INSERT INTO `train` VALUES (100001,'Prudential-Heath Express',101,111),(100002,'Longwood-Riverside local',112,120),(100003,'Riverside-Longwood express',111,101);
+/*!40000 ALTER TABLE `train` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trainclass`
+--
+
+DROP TABLE IF EXISTS `trainclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainclass` (
+  `TrainClassID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainID` int(11) NOT NULL,
+  `Fare` decimal(6,4) NOT NULL,
+  `ClassID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TrainClassID`),
+  KEY `IX_Relationship23` (`TrainID`),
+  KEY `IX_Relationship26` (`ClassID`),
+  CONSTRAINT `Has_a_Relationship5` FOREIGN KEY (`TrainID`) REFERENCES `train` (`TrainID`),
+  CONSTRAINT `Has_a_Relationship6` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ClassID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10009 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainclass`
+--
+
+LOCK TABLES `trainclass` WRITE;
+/*!40000 ALTER TABLE `trainclass` DISABLE KEYS */;
+INSERT INTO `trainclass` VALUES (10001,100001,20.0000,4),(10002,100001,30.0000,1),(10003,100001,45.0000,2),(10004,100001,70.0000,3),(10005,100002,50.0000,4),(10006,100002,60.0000,1),(10007,100002,75.0000,2),(10008,100002,90.0000,3);
+/*!40000 ALTER TABLE `trainclass` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trainday`
+--
+
+DROP TABLE IF EXISTS `trainday`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainday` (
+  `DayOfWeekID` int(11) NOT NULL AUTO_INCREMENT,
+  `trainid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`DayOfWeekID`),
+  KEY `IX_Relationship50` (`DayOfWeekID`),
+  KEY `frgnkeytrains` (`trainid`),
+  CONSTRAINT `frgnkeyDayOftheweek` FOREIGN KEY (`DayOfWeekID`) REFERENCES `weekday` (`DayOfWeekID`),
+  CONSTRAINT `frgnkeytrains` FOREIGN KEY (`trainid`) REFERENCES `train` (`TrainID`)
+) ENGINE=InnoDB AUTO_INCREMENT=100004 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainday`
+--
+
+LOCK TABLES `trainday` WRITE;
+/*!40000 ALTER TABLE `trainday` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainday` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trainschedule`
+--
+
+DROP TABLE IF EXISTS `trainschedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainschedule` (
+  `StationID` int(11) NOT NULL,
+  `InTime` time DEFAULT NULL,
+  `OutTime` time DEFAULT NULL,
+  `TrainID` int(11) NOT NULL,
+  PRIMARY KEY (`StationID`,`TrainID`),
+  KEY `Has_a_Relationship2` (`TrainID`),
+  CONSTRAINT `Has_a_Relationship2` FOREIGN KEY (`TrainID`) REFERENCES `train` (`TrainID`),
+  CONSTRAINT `Has_a_relationship1` FOREIGN KEY (`StationID`) REFERENCES `station` (`StationID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainschedule`
+--
+
+LOCK TABLES `trainschedule` WRITE;
+/*!40000 ALTER TABLE `trainschedule` DISABLE KEYS */;
+INSERT INTO `trainschedule` VALUES (101,'10:00:00','10:00:05',100001),(102,'10:05:00','10:05:05',100001),(103,'10:10:00','10:10:03',100001),(104,'10:15:00','10:15:03',100001),(105,'10:20:00','10:20:03',100001),(106,'10:25:00','10:25:03',100001),(107,'10:30:00','10:30:03',100001),(108,'10:35:00','10:35:03',100001),(109,'10:40:00','10:40:03',100001),(110,'10:45:00','10:45:03',100001),(111,'10:50:00','10:50:03',100001),(111,'16:00:00','16:00:05',100002),(111,'16:45:00','16:45:03',100003),(112,'16:05:00','16:05:05',100002),(112,'16:40:00','16:40:03',100003),(113,'16:10:00','16:10:03',100002),(113,'16:35:00','16:35:03',100003),(114,'16:15:00','16:15:03',100002),(114,'16:30:00','16:30:03',100003),(115,'16:20:00','16:20:03',100002),(115,'16:25:00','16:25:03',100003),(116,'16:25:00','16:25:03',100002),(116,'16:20:00','16:20:03',100003),(117,'16:30:00','16:30:03',100002),(117,'16:15:00','16:15:03',100003),(118,'16:35:00','16:35:03',100002),(118,'16:10:00','16:10:03',100003),(119,'16:40:00','16:40:03',100002),(119,'16:05:00','16:05:05',100003),(120,'16:45:00','16:45:03',100002),(120,'16:00:00','16:00:05',100003);
+/*!40000 ALTER TABLE `trainschedule` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `trainswithallseats`
+--
+
+DROP TABLE IF EXISTS `trainswithallseats`;
+/*!50001 DROP VIEW IF EXISTS `trainswithallseats`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `trainswithallseats` AS SELECT 
+ 1 AS `TrainID`,
+ 1 AS `ClassId`,
+ 1 AS `coachID`,
+ 1 AS `SeatId`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `PersonID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `EmailID` varchar(50) NOT NULL,
+  `AccountBalance` int(11) NOT NULL,
+  PRIMARY KEY (`PersonID`),
+  UNIQUE KEY `UserID` (`UserID`),
+  CONSTRAINT `Is_a_Relationship1` FOREIGN KEY (`PersonID`) REFERENCES `person` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (10,235623,'takekaratul@gmail.com',99999),(11,345634,'patilMihir@gmail.com',9999),(12,677867,'lennonJohn@gmail.com',9),(13,234234,'RexSkill@gmail.com',9999),(14,79970,'WellHard@gmail.com',9334),(15,263477,'ThevarKaran@gmail.com',99),(16,666666,'PittBrad@gmail.com',9999);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `weekday`
+--
+
+DROP TABLE IF EXISTS `weekday`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `weekday` (
+  `DayOfWeekID` int(11) NOT NULL,
+  `WeekDay` varchar(20) NOT NULL,
+  PRIMARY KEY (`DayOfWeekID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weekday`
+--
+
+LOCK TABLES `weekday` WRITE;
+/*!40000 ALTER TABLE `weekday` DISABLE KEYS */;
+/*!40000 ALTER TABLE `weekday` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'train_databse'
+--
+
+--
+-- Dumping routines for database 'train_databse'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `findMostReservedTrain` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findMostReservedTrain`()
+BEGIN
+Select TrainName,count(v.SeatID) from trainswithallseats v 
+join train t on t.TrainID=v.TrainID
+join reservation r on r.SeatID=v.SeatID
+group by v.trainid;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `findTrainsFor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findTrainsFor`(IN fromStation varchar(50) ,IN toStation varchar(50))
+BEGIN
+select StationId into @fromStation from station where StationName=fromStation;
+select StationId into @toStation from station where StationName=toStation;
+
+
+CREATE TEMPORARY TABLE fromTrains select Trainid,inTime from trainschedule where StationID=@fromStation;
+CREATE TEMPORARY TABLE toTrains select DISTINCT (Trainid),inTime from trainschedule where StationID=@toStation;
+select * from fromTrains;
+select * from toTrains;
+
+select t.Trainid from fromTrains f join toTrains t on f.TrainID = t.Trainid where timediff(t.InTime,f.intime)>0;
+
+DROP Table fromTrains;
+DROP Table toTrains;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ReservationHistoryOfUser` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReservationHistoryOfUser`(In UserId int)
+BEGIN
+
+Select TrainName,CoachName,SeatNo,DateOfTravel,ReservationNo,'Reserved' from TrainsWithAllSeats v 
+join train t on  v.trainId=t.trainID  
+join coach c on v.coachID=c.coachID
+join seat s on s.SeatId=v.seatid
+join reservation r on r.SeatID = v.SeatId
+where r.userid = Userid
+ union
+Select TrainName,CoachName,SeatNo,DateOfTravel,ReservationNo,'Cancelled' from TrainsWithAllSeats v 
+join train t on  v.trainId=t.trainID  
+join coach c on v.coachID=c.coachID
+join seat s on s.SeatId=v.seatid
+join cancelreservation cr on cr.SeatID = v.SeatId
+where cr.userid = Userid;
+ 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ReserveSeat` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReserveSeat`(IN trainID varchar(50) ,In UserId int,IN Class varchar(10), in TravelDate date )
+BEGIN
+
+START TRANSACTION;
+Select SeatId into @reserveSeat 
+	from TrainsWithAllSeats v 
+	join class c on v.classID = c.classid 
+	where c.ClassName =Class 
+	and v.TrainID=trainID 
+	and v.SeatId not in (select seatid from reservation where DateOfTravel=TravelDate) 
+	Limit 1;
+select @reserveSeat;
+	 if (@reserveSeat  is not null) then
+     insert into reservation(DateOfTravel,ReservationNo,SeatId,PersonID)  
+	 	values(TravelDate,FLOOR(RAND()*(9999999-1111111+1))+11111111,@reseveSeat,UserId);
+         
+	 	
+	 else 
+		  select 'no seats available';
+	 end if; 
+ COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `trainswithallseats`
+--
+
+/*!50001 DROP VIEW IF EXISTS `trainswithallseats`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `trainswithallseats` AS select `t`.`TrainID` AS `TrainID`,`tc`.`ClassID` AS `ClassId`,`c`.`CoachID` AS `coachID`,`s`.`SeatID` AS `SeatId` from ((((`train` `t` join `trainclass` `tc` on((`t`.`TrainID` = `tc`.`TrainID`))) join `class` `cl` on((`tc`.`ClassID` = `cl`.`ClassID`))) join `coach` `c` on((`c`.`TrainClassID` = `tc`.`TrainClassID`))) join `seat` `s` on((`s`.`CoachID` = `c`.`CoachID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-12-12 11:43:16
+

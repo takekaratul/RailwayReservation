@@ -1,0 +1,29 @@
+--
+-- Table structure for table `trainclass`
+--
+
+DROP TABLE IF EXISTS `trainclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trainclass` (
+  `TrainClassID` int(11) NOT NULL AUTO_INCREMENT,
+  `TrainID` int(11) NOT NULL,
+  `Fare` decimal(6,4) NOT NULL,
+  `ClassID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TrainClassID`),
+  KEY `IX_Relationship23` (`TrainID`),
+  KEY `IX_Relationship26` (`ClassID`),
+  CONSTRAINT `Has_a_Relationship5` FOREIGN KEY (`TrainID`) REFERENCES `train` (`TrainID`),
+  CONSTRAINT `Has_a_Relationship6` FOREIGN KEY (`ClassID`) REFERENCES `class` (`ClassID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10009 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trainclass`
+--
+
+LOCK TABLES `trainclass` WRITE;
+/*!40000 ALTER TABLE `trainclass` DISABLE KEYS */;
+INSERT INTO `trainclass` VALUES (10001,100001,20.0000,4),(10002,100001,30.0000,1),(10003,100001,45.0000,2),(10004,100001,70.0000,3),(10005,100002,50.0000,4),(10006,100002,60.0000,1),(10007,100002,75.0000,2),(10008,100002,90.0000,3);
+/*!40000 ALTER TABLE `trainclass` ENABLE KEYS */;
+UNLOCK TABLES;
